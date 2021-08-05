@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from boards import views
+from boards.views import ArticleCreateUpdateView, ArticleDetailView, ArticleListView, hello_world
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/<to>', views.hello_world, name='hello'),
+    path('hello/<to>', hello_world, name='hello'),
+
+    path('article/', ArticleListView.as_view(), name='list_article'),
+    path('article/create/<article_id>', ArticleCreateUpdateView.as_view(),name='create_or_update_article'),
+    path('article/<article_id>/', ArticleDetailView.as_view(), name='detail_article'),
+    path('article/<article_id>/update/', ArticleCreateUpdateView.as_view(), name='create_or_update_article'),
 ]
