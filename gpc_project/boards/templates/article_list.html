@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% block css %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> {% endblock css %}
+{% block title %}
+<title>게시글 목록</title> 
+{% endblock title%} 
+{% block content %}
+<table class="table table-hover table-responsive">
+  <thead>
+    <th>게시글 번호</th>
+    <th>제목</th>
+    <th>작성자</th>
+  </thead>
+  <tbody>
+  {% for obj in data%}
+    <tr onclick="location.href='/article/{{obj.id}}/'">
+      <td>{{obj.id}}</td>
+      <td>{{obj.title}}</td>
+      <td>{{obj.author}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<!-- 버튼 click 시 url 이동 -->
+<a href="/article/create/"><button class="btn btn-primary" type="button">새 게시글 작성</button></a>
+{% endblock content%}
