@@ -64,7 +64,6 @@ class ArticleCreateUpdateView(TemplateView):  # 게시글 추가, 수정
     # 화면 요청
     def get(self, request, *args, **kwargs):  
         article = self.get_object()
-        print(article)
         ctx = {
             'view': self.__class__.__name__,
             'article': article
