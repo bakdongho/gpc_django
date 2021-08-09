@@ -22,8 +22,8 @@ class User(AbstractBaseUser,PermissionsMixin):
             'unique': _("A user with that username already exists."),
         },
     )
-    email = models.EmailField('email', unique=True)
-    name = models.CharField('name', max_length=30, blank=True)
+    email = models.EmailField('이메일', unique=True)
+    name = models.CharField('닉네임', max_length=30, blank=True)
     is_staff= models.BooleanField('스태프 권한', default=False)
     is_active= models.BooleanField('사용중', default=True)
     date_joined= models.DateTimeField('가입일', default=timezone.now)
