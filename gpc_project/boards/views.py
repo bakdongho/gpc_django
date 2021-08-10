@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Article
 # Create your views here.
@@ -49,7 +50,7 @@ class ArticleDetailView(TemplateView):
 
 # 생성 및 수정
 # @method_decorator(csrf_exempt, name='dispatch')
-class ArticleCreateUpdateView(TemplateView):  # 게시글 추가, 수정
+class ArticleCreateUpdateView(LoginRequiredMixin,TemplateView):  # 게시글 추가, 수정
     template_name = 'article_update.html'
     query_set= Article.objects.all()
     pk_url_kwargs='article_id'
