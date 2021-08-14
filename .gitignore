@@ -181,6 +181,10 @@ Temporary Items
 .apdisk
 
 ### Python ###
+# IDE pycharm or vscode
+.idea
+.vscode
+
 # Byte-compiled / optimized / DLL files
 
 # C extensions
