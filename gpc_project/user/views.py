@@ -13,7 +13,7 @@ class ResendVerifyEmailView(VerifyEmailMixin, FormView):
     model = get_user_model()
     form_class = VerificationEmailForm
     success_url = '/user/login/'
-    template_name = 'user/resend_verify_email.html'
+    template_name = 'user/resend_verify_form.html'
     finish_message='작성하신 이메일주소로 인증메일을 발송했으니 확인 후 인증해주세요.'
 
     def form_valid(self, form):
@@ -29,6 +29,7 @@ class ResendVerifyEmailView(VerifyEmailMixin, FormView):
 
 class UserRegistrationView(VerifyEmailMixin,CreateView):
     model=get_user_model()
+    template_name = 'user/registration_form.html'
     success_url='/user/login/'
     form_class=CustomUserCreationForm
     verify_url = '/user/verify/'

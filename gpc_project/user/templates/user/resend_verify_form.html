@@ -1,28 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}<title>로그인</title>{% endblock %}
+{% block title %}<title>이메일 인증</title>{% endblock %}
 
 {% block css %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'user/css/user.css' %}">
+<link rel="stylesheet" href="{% static 'user/css/user.css'%}">
 {% endblock css %}
 
 {% block content %}
 <div class='panel panel-default user-panel'>
     <div class='panel-heading'>
-        로그인
+        인증이메일 보내기
     </div>
     <div class="panel-body">
         <form action="." method='post'>
             {% csrf_token %}
+            <b class="">이메일주소를 입력해주세요.</b>
             {% include 'user/partials/form_field.html' with form=form %}
             <div class="form-actions">
-                <button class="btn btn-primary btn-large" type="submit">로그인하기</button>
+                <button class="btn btn-primary btn-large" type="submit">인증이메일 보내기</button>
             </div>
         </form>
-        <a href="/user/resend_verify_email/">
-            <div class="link-below-button">인증이메일 재발송</div>
-        </a>
     </div>
 </div>
 

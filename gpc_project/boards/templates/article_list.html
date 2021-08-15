@@ -1,5 +1,8 @@
 {% extends 'base.html' %} 
-{% block css %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> {% endblock css %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'boards/css/boards.css'%}">
+{% endblock css %}
 {% block title %}
 <title>게시글 목록</title> 
 {% endblock title%} 
