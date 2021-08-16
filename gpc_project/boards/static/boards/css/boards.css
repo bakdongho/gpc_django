@@ -1,3 +1,9 @@
 tbody>tr {
     cursor: pointer;
 }
+
+.page_line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 from .models import Article
 # Create your views here.
@@ -16,12 +17,15 @@ def hello_world(request, to):
 # 목록 보기
 class ArticleListView(TemplateView):
     template_name='article_list.html'
-    query_set= Article.objects.all().order_by('-created_dt')
+
     # template에 데이터 전달
     def get(self, request, *arg, **kwargs):
+        page = self.request.GET.get('page',1)
+        article_obj=Article.objects.order_by('-created_dt')
+        article = Paginator(article_obj,10)
         ctx={
             'view' : self.__class__.__name__,
-            'data' : self.query_set,
+            'data' : article.get_page(page),
         }
         return self.render_to_response(ctx)
 
@@ -39,7 +43,7 @@ class ArticleDetailView(TemplateView):
     def get(self, request, *arg, **kwargs):
         article=self.get_object()
         if not article:
-            raise Http404('invalid article_id')
+            messages.error(self.request, '게시글을 찾을 수 없습니다.', extra_tags='danger')
         ctx={
             'view' : self.__class__.__name__,
             'article' : article,
