@@ -18,7 +18,7 @@
     <tr onclick="location.href='/article/{{obj.id}}/'">
       <td>{{obj.id}}</td>
       <td>{{obj.title}}</td>
-      <td>{{obj.author}}</td>
+      <td>{{obj.author_id}}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -42,7 +42,7 @@
         {% for page_number in data.paginator.page_range %}
             {% if page_number == data.number %}
             <li class="page-item active" aria-current="page">
-                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                <a class="page-link" href="#">{{ page_number }}</a>
             </li>
             {% else %}
             <li class="page-item">

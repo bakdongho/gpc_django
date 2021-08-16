@@ -77,10 +77,12 @@ class ArticleCreateUpdateView(LoginRequiredMixin,TemplateView):  # 게시글 추
     # 액션
     def post(self, request, *args, **kwargs): 
         action= request.POST.get('action')
-        post_data={key:request.POST.get(key) for key in ('title', 'content','author')}
+        post_data={key:request.POST.get(key) for key in ('title', 'content')}
         for key in post_data:
             if not post_data[key]:
                 messages.error(self.request, '{} 값이 존재하지 않습니다.'.format(key), extra_tags='danger')
+        post_data['author'] = self.request.user
+        print('>>>>>post data : ',post_data)
         if len(messages.get_messages(request))==0:
             if action=='create':
                 article=Article.objects.create(**post_data)

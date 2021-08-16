@@ -22,10 +22,10 @@
         <th>내용</th>
         <td><textarea rows="10" class="form-control" name="content">{{article.content | linebreaksbr }}</textarea></td>
     </tr>
-    <tr>
+    {% comment %} <tr>
         <th>작성자</th>
         <td><input type="text" class="form-control" name="author" value="{{article.author}}"></td>
-    </tr>
+    </tr> {% endcomment %}
     <tr>
         <th>작성날짜</th>
         <td>{{article.created_dt | date:"Y-m-d H:i"}}</td>
