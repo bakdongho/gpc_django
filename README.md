@@ -45,3 +45,18 @@ ex) 줄바꿈 html \<br>로 변경 => {{ article.content | linebreaksbr }} / 날
 
 참고 사이트 : https://swarf00.github.io/
 
+## 시간을 많이 잡아먹은 ERROR
+
+### 1. NoReverseMatch ERROR
+
+- reference : https://stackoverflow.com/questions/38390177/what-is-a-noreversematch-error-and-how-do-i-fix-it
+> The NoReverseMatch exception is raised by django.core.urlresolvers when a matching URL in your URLconf cannot be identified based on the parameters supplied.
+
+이 에러가 발생하는 원인에 대해서 위과 같이 설명한다. 즉 url,파라미터를 제대로 제공하지 못해 매칭되는 것을 url을 django가 찾지 못하는 것이다. url을 정의 해주는 부분만 찾아보면 쉽게 해결할 수 있는 에러이다. 그렇게 어려운 에러가 아니지만 내가 왜 헤매었는지, 생각해보면 '여긴 슥 봤는데, 잘 되어 있어, 틀린 것이 절대 없을 거야' 라고 안일하게 생각하던 버릇때문에 꼬박 하루 넘게를 날렸다. 
+
+원인은 template html 파일에 `{% url 'myapp:update' %}` 이 부분이었다. 이곳이 가르키는 url은 (`/<article_id>/update`) 파라미터가 필요한 url인데 파라미터를 전달해주지 못했기 때문에 일어난 에러였다. 그래서 단순히 `{% url 'myapp:update' article.pk %}` article.pk 만 같이 보내주는 되는거였다. 
+
+절대 안보려던 html 파일에서 이걸 찾게된 이유는, 다른 페이지를 만들어서 실험을 하는데 잘되는데 저 페이지만 안되는 것이었다. 그래서 작동하는 원리를 따라다가보니, 장고가 해당 url과 연결된 함수를 실행시키면서, template에서 html 파일을 찾아 쭉 읽어서 jinja 문법을 파싱하여 값을 다 바꿔서 rendering 하는 식이었다. 그 과정중에 난 분명 파라미터를 명시하여 넘겨준다고 생각했는데, 없으니 이상하다 생각하고 자세히 본 결과 빼먹었다는 것을 알게되었고 수정하면서 쉽게 해결했다. 
+
+진짜 컴퓨터는 에러 메세지를 던지면서 안되는 이유를 잘 알려준다. "왜 맞는데 틀리지?" 라는 생각은 정말 어리석은 것 같다. 항상 의심하고, 에러가 나는 원인을 정확히 알고 그 부분을 중점적으로 디버깅 할 수 있도록 노력하자. 그랬다면 금방 찾아서 해결됐을 것이다.
+
