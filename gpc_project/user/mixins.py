@@ -18,4 +18,4 @@ class VerifyEmailMixin:
         messages.info(self.request, finish_meassage)
 
     def build_verification_link(self, user, token):
-        return '{}/user/{}/verify/{}/'.format(self.request.META.get('HTTP_ORIGIN'), user.pk, token)
+        return '{}/user/{}/verify/{}'.format(self.request.META.get('HTTP_ORIGIN'), user.pk, token)

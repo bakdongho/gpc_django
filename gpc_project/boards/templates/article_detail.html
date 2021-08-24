@@ -20,12 +20,13 @@
     </tr>
     <tr>
         <th>작성자</th>
-        <td>{{article.author}}</td>
+        <td>{{article.author_id}}</td>
     </tr>
     <tr>
         <th>작성날짜</th>
         <td>{{article.created_dt | date:"Y-m-d H:i"}}</td>
     </tr>
 </table>
-<a href="/article/{{ article.pk }}/update/"><button class="btn btn-primary" type="button">게시글 수정</button></a>
+<a href="{% url 'boards:updateArticle' article.pk %}"><button class="btn btn-primary" type="button">게시글 수정</button></a>
+
 {% endblock content %}

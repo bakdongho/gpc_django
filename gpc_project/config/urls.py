@@ -14,24 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth.views import LogoutView
-from django.urls import path
-from boards.views import ArticleCreateUpdateView, ArticleDetailView, ArticleListView, hello_world
-from user.views import UserRegistrationView, UserLoginView, UserVerificationView, ResendVerifyEmailView
+# from django.contrib.auth.views import LogoutView
+# from boards.views import ArticleCreateUpdateView, ArticleDetailView, ArticleListView, hello_world
+# from user.views import UserRegistrationView, UserLoginView, UserVerificationView, ResendVerifyEmailView
+from boards.views import ArticleListView
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', UserLoginView.as_view()),
-    path('hello/<to>', hello_world, name='hello'),
+    path('', ArticleListView.as_view()),
 
-    path('article/', ArticleListView.as_view(), name='list_article'),
-    path('article/create/', ArticleCreateUpdateView.as_view(),name='create_or_update_article'),
-    path('article/<article_id>/', ArticleDetailView.as_view(), name='detail_article'),
-    path('article/<article_id>/update/', ArticleCreateUpdateView.as_view(), name='create_or_update_article'),
+    path('article/', include(('boards.urls','boards'))),
 
-    path('user/create/', UserRegistrationView.as_view()),
-    path('user/<user_pk>/verify/<email_token>/', UserVerificationView.as_view()),
-    path('user/resend_verify_email/', ResendVerifyEmailView.as_view()),
-    path('user/login/', UserLoginView.as_view()),
-    path('user/logout/', LogoutView.as_view()),
+    path('user/', include(('user.urls','user'))),
+
 ]

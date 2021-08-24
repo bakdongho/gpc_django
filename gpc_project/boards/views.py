@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from config.settings import LOGIN_REDIRECT_URL
 
 from .models import Article
 # Create your views here.
@@ -67,7 +68,7 @@ class ArticleCreateUpdateView(LoginRequiredMixin,TemplateView):  # 게시글 추
         return article
 
     # 화면 요청
-    def get(self, request, *args, **kwargs):  
+    def get(self, request, *args, **kwargs):
         article = self.get_object()
         ctx = {
             'view': self.__class__.__name__,
@@ -75,14 +76,13 @@ class ArticleCreateUpdateView(LoginRequiredMixin,TemplateView):  # 게시글 추
         }
         return self.render_to_response(ctx)
     # 액션
-    def post(self, request, *args, **kwargs): 
+    def post(self, request, *args, **kwargs):
         action= request.POST.get('action')
         post_data={key:request.POST.get(key) for key in ('title', 'content')}
         for key in post_data:
             if not post_data[key]:
                 messages.error(self.request, '{} 값이 존재하지 않습니다.'.format(key), extra_tags='danger')
         post_data['author'] = self.request.user
-        print('>>>>>post data : ',post_data)
         if len(messages.get_messages(request))==0:
             if action=='create':
                 article=Article.objects.create(**post_data)
@@ -96,7 +96,7 @@ class ArticleCreateUpdateView(LoginRequiredMixin,TemplateView):  # 게시글 추
             else:
                 messages.error(self.request, '알 수 없는 요청입니다.', extra_tags='danger')
             
-            return HttpResponseRedirect('/article/')
+            return HttpResponseRedirect(LOGIN_REDIRECT_URL)
         ctx = {
             'view' : self.__class__.__name__,
             'article' : self.get_object() if action == 'update' else None,

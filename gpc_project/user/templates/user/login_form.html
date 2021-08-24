@@ -13,14 +13,14 @@
         로그인
     </div>
     <div class="panel-body">
-        <form action="." method='post'>
+        <form action="{% url 'user:userLogin' %}" method='post'>
             {% csrf_token %}
             {% include 'user/partials/form_field.html' with form=form %}
             <div class="form-actions">
                 <button class="btn btn-primary btn-large" type="submit">로그인하기</button>
             </div>
         </form>
-        <a href="/user/resend_verify_email/">
+        <a href="{% url 'user:resendVerifyEmail' %}">
             <div class="link-below-button">인증이메일 재발송</div>
         </a>
     </div>

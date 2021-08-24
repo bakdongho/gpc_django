@@ -14,7 +14,7 @@
         가입하기
     </div>
     <div class="panel-body">
-        <form action="." method='post'>
+        <form action="{% url 'user:userRegistration' %}" method='post'>
             {% csrf_token %}
             {% include 'user/partials/form_field.html' with form=form %}
             <div class="form-actions">

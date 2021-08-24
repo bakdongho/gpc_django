@@ -13,7 +13,7 @@
         인증이메일 보내기
     </div>
     <div class="panel-body">
-        <form action="." method='post'>
+        <form action="{% url 'user:resendVerifyEmail' %}" method='post'>
             {% csrf_token %}
             <b class="">이메일주소를 입력해주세요.</b>
             {% include 'user/partials/form_field.html' with form=form %}

@@ -15,7 +15,7 @@
   </thead>
   <tbody>
   {% for obj in data%}
-    <tr onclick="location.href='/article/{{obj.id}}/'">
+    <tr onclick="location.href='/article/{{obj.id}}'">
       <td>{{obj.id}}</td>
       <td>{{obj.title}}</td>
       <td>{{obj.author_id}}</td>
@@ -25,7 +25,7 @@
 </table>
 <div class="page_line">
 <!-- 버튼 click 시 url 이동 -->
-<a href="/article/create/"><button class="btn btn-primary" type="button">새 게시글 작성</button></a>
+<a href="{% url 'boards:createArticle' %}"><button class="btn btn-primary" type="button">새 게시글 작성</button></a>
 
 <ul class="pagination justify-content-center">
         <!-- 이전페이지 -->

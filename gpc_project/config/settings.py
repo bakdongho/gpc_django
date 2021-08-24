@@ -38,17 +38,18 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'user.User'
 
-LOGIN_REDIRECT_URL = '/article/'
+LOGIN_REDIRECT_URL = '/article'
 
-LOGIN_URL = '/user/login/'
+LOGIN_URL = '/user/login'
 
-LOGOUT_REDIRECT_URL = '/article/'
+LOGOUT_REDIRECT_URL = '/article'
 
 # Application definition
 
 INSTALLED_APPS = [
     'boards',
     'user',
+    'map',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

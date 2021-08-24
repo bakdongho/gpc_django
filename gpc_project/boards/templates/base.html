@@ -21,20 +21,23 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
+                <a class="navbar-brand" href="/article/">메인</a>
                 <a class="navbar-brand" href="/article/">게시글 목록</a>
+                <a class="navbar-brand" href="https://github.com/Park-DongHo">Git-hub</a>
+                <a class="navbar-brand" href="https://codong.tistory.com/">Blog</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="">
                         {% if not request.user.is_authenticated %}
-                        <a href="/user/create/">가입하기</a>
+                        <a href="{% url 'user:userRegistration'%}">가입하기</a>
                         {% endif %}
                     </li>
                     <li class="">
                         {% if request.user.is_authenticated %}
-                        <a href="/user/logout/">로그아웃</a>
+                        <a href="{% url 'user:userLogout'%}">로그아웃</a>
                         {% else %}
-                        <a href="/user/login/">로그인</a>
+                        <a href="{% url 'user:userLogin'%}">로그인</a>
                         {% endif %}
                     </li>
                 </ul>

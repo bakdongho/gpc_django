@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<form action='.' method="post" class="form-horizontal">
+<form action='{% if article %}{% url "boards:updateArticle" article.pk %}{% else %}{% url "boards:createArticle" %}{% endif %}' method="post" class="form-horizontal">
 {% csrf_token %}
 <input type="hidden" name="action" value="{% if article %}update{% else %}create{% endif %}">
 <table class="table table-striped table-bordered">

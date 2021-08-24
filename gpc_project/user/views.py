@@ -12,7 +12,7 @@ from user.mixins import VerifyEmailMixin
 class ResendVerifyEmailView(VerifyEmailMixin, FormView):
     model = get_user_model()
     form_class = VerificationEmailForm
-    success_url = '/user/login/'
+    success_url = '/user/login'
     template_name = 'user/resend_verify_form.html'
     finish_message='작성하신 이메일주소로 인증메일을 발송했으니 확인 후 인증해주세요.'
 
@@ -30,9 +30,9 @@ class ResendVerifyEmailView(VerifyEmailMixin, FormView):
 class UserRegistrationView(VerifyEmailMixin,CreateView):
     model=get_user_model()
     template_name = 'user/registration_form.html'
-    success_url='/user/login/'
+    success_url='/user/login'
     form_class=CustomUserCreationForm
-    verify_url = '/user/verify/'
+    verify_url = '/user/verify'
     finish_message='회원가입을 축하드립니다. 가입하신 이메일주소로 인증메일을 발송했으니 확인 후 인증해주세요.'
 
     def form_valid(self, form):
@@ -50,7 +50,7 @@ class UserLoginView(LoginView):
 class UserVerificationView(TemplateView):
 
     model = get_user_model()
-    redirect_url = '/user/login/'
+    redirect_url = '/user/login'
     token_generator = default_token_generator
 
     def get(self, request, *args, **kwargs):
