@@ -17,15 +17,17 @@ from django.contrib import admin
 # from django.contrib.auth.views import LogoutView
 # from boards.views import ArticleCreateUpdateView, ArticleDetailView, ArticleListView, hello_world
 # from user.views import UserRegistrationView, UserLoginView, UserVerificationView, ResendVerifyEmailView
-from boards.views import ArticleListView
+from map.views import MapMain
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', ArticleListView.as_view()),
+    path('', MapMain.as_view()),
 
     path('article/', include(('boards.urls','boards'))),
 
     path('user/', include(('user.urls','user'))),
+
+    path('map/', include(('map.urls','map'))),
 
 ]

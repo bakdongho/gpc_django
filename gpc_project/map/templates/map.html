@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src='{% static "map/js/map.js" %}'></script>
+{% endblock %}
+
+{% block css %}       
+<link href='{% static "map/css/map.css" %}' rel="stylesheet" />
+
+{% endblock css %}
+
+{% block title %}      
+    <title>map</title>
+{% endblock title %}
+
+{% block content %}
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{client_id}}&submodules=geocoder"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{client_id}}&callback=CALLBACK_FUNCTION"></script>
+    
+<div id="map" style="">
+    <div class="search">
+        <input id="address" type="text" placeholder="검색할 주소" />
+        <input id="submit" type="button" value="주소 검색" />
+    </div>
+</div>
+  <ul class="menu-wrap">
+      <li>음식점</li>
+      <li>한식</li>
+      <li>중식</li>
+      <li>일식</li>
+      <li>양식</li>
+      <li>분식</li>
+      <li>프랜차이즈</li>
+      <li>카페</li>
+  </ul>
+<div id="waiting" style="display:none;"><h1 id ="wait_txt">검색 중.. 잠시만 기다려 주십시오..</h1></div>
+{% endblock %}
+
+{% block script %}
+var markers = [],
+    search_url='{% url "map:mapSearch"%}';
+
+var map = new naver.maps.Map("map", {
+    center: new naver.maps.LatLng(37.3595316, 127.1052133),
+    zoom: 17,
+    mapTypeControl: true
+});
+
+map.setCursor('pointer');
+
+naver.maps.onJSContentLoaded = initGeocoder;
+naver.maps.Event.once(map, 'init_stylemap', initGeocoder);
+
+const menuWrap = document.querySelector('.menu-wrap');
+
+menuWrap.addEventListener('click', e => {
+    const selected = e.target;
+    select(menuWrap, selected);
+})
+
+$('#address').on('keydown', function(e) {
+    var keyCode = e.which;
+    if (keyCode === 13) { // Enter Key
+        searchAddressToCoordinate($('#address').val());
+    }
+
+
+});
+$('#submit').on('click', function(e) {
+    e.preventDefault();
+    searchAddressToCoordinate($('#address').val());
+});
+
+{% endblock %}

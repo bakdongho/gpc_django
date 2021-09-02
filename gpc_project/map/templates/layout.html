@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp, notranslate, noimageindex" />
+    <title>GodPerCost</title>
+    <link href='{% static "map/css/map.css" %}' rel="stylesheet" />
+    
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <div id="main">
+        <div id="contents">
+
+            <nav id="topMenu">
+                <h1><a style="background-color:#2d2d2d;text-decoration:none;color:white;" href="/">hello GPC~!</a></h1>
+                <ul>
+                    <li><a class="menuLink" href="#">About us</a></li>
+                    <li><a class="menuLink" href="#">Ministries</a></li>
+                    <li><a class="menuLink" href="#">Community</a></li>
+                    <li><a class="menuLink" href="https://github.com/Park-DongHo">git-hub</a></li>
+                    <li><a class="menuLink" href="https://codong.tistory.com/">Blog</a></li>
+                </ul>
+            </nav>
+            {% block body %}{% endblock %}
+
+            <script type="text/javascript">
+               {% block script %}
+                {% endblock %}
+            </script>
+        </div>
+        <div id="sidebar"></div>
+    </div>
+
+</body>
+
+</html>
